@@ -41,7 +41,7 @@ def infer_classify(img_path, model, class_name):
     image = rgb_loader(img_path)
     width, height = image.size
     image = data_transforms_classify(image).unsqueeze(0)
-    image = image.cuda()
+    #image = image.cuda()
     outputs = model(image)
     _, preds = torch.max(outputs, 1)
     return class_name[preds[0]]
@@ -73,7 +73,7 @@ def infer_classify_whole_image(img_path, model, class_name, Te_bao_BatThuong, Te
     print("*"*20)
     print(data.shape)
     with torch.no_grad(): 
-        data = data.to('cuda')
+        #data = data.to('cuda')
         outputs = model(data)
         outputs_tanh = torch.tanh(outputs)
         _, preds = torch.max(outputs, 1)
@@ -144,7 +144,7 @@ def infer_classify_whole_image_v2(img_path, model, class_name, Te_bao_BatThuong,
             total_cells.append(cell)
     data = convert_to_tensor(total_cells) 
     with torch.no_grad(): 
-        data = data.to('cuda')
+        #data = data.to('cuda')
         outputs = model(data)
         outputs_tanh = torch.tanh(outputs)
         _, preds = torch.max(outputs, 1)
