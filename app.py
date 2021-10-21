@@ -6,7 +6,6 @@ from predict import infer_classify, infer_classify_whole_image, infer_classify_w
 from flask import jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
-from config import *
 import torch
 from torchvision import models
 import torch.nn as nn 
@@ -20,8 +19,8 @@ def load_model_classify():
     model = models.resnet50(pretrained=True)
     num_ftrs = model.fc.in_features
     model.fc = nn.Linear(num_ftrs, 17)
-    model = model.to('cuda')
-    model.load_state_dict(torch.load("/home/chungtran/Code/Tebao/sipakmed/checkpoint_new_dataset_bb50_lan2.pth"))
+    #model = model.to('cuda')
+    model.load_state_dict(torch.load("/home/chungtran/Code/Tebao/sipakmed/checkpoint_new_dataset_bb50_lan2.pth", map_location='cpu'))
     model.eval()
     class_name = ['ASC_H', 'ASC_US', 'Atophy', 'Bach_cau_da_nhan', 'Dam_te_bao_HSIL', 'Dam_te_bao_LSIL', 'Di_san_vay', 'TE_BAO_LSIL', 'Te_bao_HSIL', 'Te_bao_can_day', 'Te_bao_day', 'Te_bao_noi_mac', 'Te_bao_tuyen_co_trong', 'Te_bao_vay_be_mat', 'Te_bao_vay_trung_gian', 'Ung_thu_bieu_mo_te_bao_vay', 'background']
     return model, class_name

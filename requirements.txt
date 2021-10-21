@@ -1,0 +1,6 @@
+torch==1.9.1+cpu
+torchvision==0.10.1+cpu
+Flask==2.0.2
+Flask-Cors==3.0.10
+opencv-python==4.5.3.56
+flask-cors==3.0.10
